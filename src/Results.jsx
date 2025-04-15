@@ -7,18 +7,20 @@ function Results({ data }) {
         return (<></>)
     } else {
         return (
-            <table className="results-table">
-                <thead>
-                    <TableRow rowData={columns} isHeader={true} />
-                </thead>
-                <tbody>
-                    {data.map((row, idx) => {
-                        return(
-                            <TableRow rowData={row} key={idx}/>
-                        )
-                    })}
-                </tbody>
-            </table>
+            <div className="results-table-container">
+                <table className="results-table">
+                    <thead>
+                        <TableRow rowData={columns} isHeader={true} />
+                    </thead>
+                    <tbody>
+                        {data.map((row, idx) => {
+                            return (
+                                <TableRow rowData={row} key={idx} />
+                            )
+                        })}
+                    </tbody>
+                </table>
+            </div>
         )
     }
 }
