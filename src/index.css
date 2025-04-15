@@ -115,6 +115,11 @@ table tr:nth-child(odd) {
 
 .results-table tbody tr:hover {
     background: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+}
+
+.results-table tr {
+    cursor: default;
 }
 
 .results-table thead tr th {

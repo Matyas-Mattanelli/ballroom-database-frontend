@@ -1,3 +1,16 @@
+import { columns } from "./assets/columns.js";
+
+// Define a function opening a window with the competition results
+function openCompetitionResults(eventId, compId, year) {
+    let link;
+    if (year < 2018) { // Yellow website
+        link = `https://www.csts.cz/cs/VysledkySoutezi/Soutez/${compId}`;
+    } else { // Blue website
+        link = `https://www.csts.cz/dancesport/vysledky_soutezi/event/${eventId}/competition/${compId}`;
+    }
+    window.open(link, "_blank"); // Open a new tab with the competition results
+}
+
 // Component representing a single row in a table
 function TableRow({ rowData, isHeader = false }) {
     if (isHeader) {
@@ -12,7 +25,7 @@ function TableRow({ rowData, isHeader = false }) {
         )    
     } else {
         return (
-            <tr>
+            <tr onClick={() => openCompetitionResults(rowData[columns.indexOf('ID eventu')], rowData[columns.indexOf('ID soutěže')], Number(rowData[columns.indexOf('Datum')].slice(0, 4)))}>
                 {rowData.map((val, idx) => {
                     return (
                         <td key={idx}>{val}</td>
