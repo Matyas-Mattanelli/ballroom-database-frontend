@@ -212,20 +212,24 @@ body {
 
 /* Transitions */
 
-.fade-enter {
+.fade-height-enter {
     opacity: 0;
+    height: 0;
 }
 
-.fade-enter-active {
+.fade-height-enter-active {
     opacity: 1;
-    transition: opacity 0.5s ease;
+    height: auto;
+    transition: opacity 0.5s ease, height 0.5s ease;
 }
 
-.fade-exit {
+.fade-height-exit {
     opacity: 1;
+    height: auto;
 }
 
-.fade-exit-active {
+.fade-height-exit-active {
     opacity: 0;
-    transition: opacity 0.5s ease;
+    height: 0;
+    transition: opacity 0.5s ease, height 0.5s ease;
 }

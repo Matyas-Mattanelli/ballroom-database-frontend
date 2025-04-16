@@ -27,13 +27,13 @@ function Input({ searchHandler, columnFilterHandler, columnFilters }) {
             </div>
             <button type="button" id="submit" onClick={handleClick}>Vyhledat</button>
             <div className="filters">
-                <div className="filter-button" onClick={() => setShowColumnFilter(!showColumnFilter)}>{showColumnFilter ? "Skrýt sloupcové filtry" : "Ukázat sloupcové filtry"}</div>
-                <CSSTransition classNames="fade" in={showColumnFilter} timeout={500} nodeRef={columnFilterRef} unmountOnExit mountOnEnter>
+                <div className="filter-button" onClick={() => setShowColumnFilter(!showColumnFilter)}>{showColumnFilter ? "Skrýt sloupcové filtry" : "Zobrazit sloupcové filtry"}</div>
+                <CSSTransition classNames="fade-height" in={showColumnFilter} timeout={500} nodeRef={columnFilterRef} unmountOnExit mountOnEnter>
                     <ColumnFilter handler={columnFilterHandler} columnFilters={columnFilters} divRef={columnFilterRef}/>
                 </CSSTransition>
             </div>
             <div className="filters">
-                <div className="filter-button" onClick={() => setShowRowFilter(!showRowFilter)}>{showRowFilter ? "Skrýt řádkové filtry" : "Ukázat řádkové filtry"}</div>
+                <div className="filter-button" onClick={() => setShowRowFilter(!showRowFilter)}>{showRowFilter ? "Skrýt řádkové filtry" : "Zobrazit řádkové filtry"}</div>
                 <RowFilter show={showRowFilter} />
             </div>
         </div>

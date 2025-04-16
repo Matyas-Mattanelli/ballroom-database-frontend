@@ -3,7 +3,6 @@ import { columns } from "./assets/columns.js";
 function ColumnFilter({ handler, columnFilters, divRef }) {
     // Calculate the number of rows for the table with filters
     const nCols = 4; // Fix the number of columns to 4
-    const nRows = Math.ceil(columns.length / 4); // Calculate the required number of rows
 
     // Separate the columns into chunks containing values for each row
     const rows = [];
