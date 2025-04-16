@@ -1,11 +1,13 @@
 import { useRef,useState } from "react";
 import ColumnFilter from "./ColumnFilter";
 import RowFilter from "./RowFilter";
+import { CSSTransition } from "react-transition-group";
 
 function Input({ searchHandler, columnFilterHandler, columnFilters }) {
     // Initialize reference to the input for obtaining the input value upon clicking the submit button
     const inputRef = useRef();
     const advancedSearchRef = useRef();
+    const columnFilterRef = useRef();
 
     // Initialize variables for showing/hiding the filters
     const [showColumnFilter, setShowColumnFilter] = useState(false);
@@ -26,7 +28,9 @@ function Input({ searchHandler, columnFilterHandler, columnFilters }) {
             <button type="button" id="submit" onClick={handleClick}>Vyhledat</button>
             <div className="filters">
                 <div className="filter-button" onClick={() => setShowColumnFilter(!showColumnFilter)}>{showColumnFilter ? "Skrýt sloupcové filtry" : "Ukázat sloupcové filtry"}</div>
-                <ColumnFilter show={showColumnFilter} handler={columnFilterHandler} columnFilters={columnFilters} />
+                <CSSTransition classNames="fade" in={showColumnFilter} timeout={500} nodeRef={columnFilterRef} unmountOnExit mountOnEnter>
+                    <ColumnFilter handler={columnFilterHandler} columnFilters={columnFilters} divRef={columnFilterRef}/>
+                </CSSTransition>
             </div>
             <div className="filters">
                 <div className="filter-button" onClick={() => setShowRowFilter(!showRowFilter)}>{showRowFilter ? "Skrýt řádkové filtry" : "Ukázat řádkové filtry"}</div>

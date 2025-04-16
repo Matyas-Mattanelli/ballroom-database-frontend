@@ -4,26 +4,39 @@ body {
     display: flex;
     flex-direction: column;
     text-align: center;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    /* font-family: 'Courier New', Courier, monospace; */
     background: #ed6f6f;
     background: linear-gradient(90deg, rgba(237, 111, 111, 1) 0%, rgba(255, 198, 77, 1) 100%);
 }
 
 /* Make sure the height fits the display */
+
 #root {
     height: 60vh;
 }
 
 /* Heading */
+
 h1 {
     color: rgba(255, 255, 255, 1);
     background-color: rgba(185, 39, 39, 0.452);
-    width: fit-content;
+    width: 100%;
+    max-width: 900px;
     margin-left: auto;
     margin-right: auto;
     border-radius: 5px;
     padding: 5px;
     box-shadow: 10px 5px 5px rgba(190, 68, 68, 0.37);
+}
+
+/* Logo */
+
+#logo {
+    width: 100%;
+    max-width: 150px;
+    border-radius: 50%;
+    margin-bottom: 10px;
 }
 
 /* Input styling */
@@ -36,7 +49,7 @@ h1 {
     margin-left: auto;
     margin-right: auto;
     border-radius: 5px;
-    padding: 10px;
+    padding: 20px 0;
     margin-bottom: 15px;
 }
 
@@ -159,7 +172,8 @@ h1 {
     margin-bottom: 30px;
 }
 
-.results-table th, .results-table td {
+.results-table th,
+.results-table td {
     padding: 5px;
     text-align: center;
     background: rgba(255, 255, 255, 0.2);
@@ -168,7 +182,8 @@ h1 {
 }
 
 .results-table tr:nth-child(odd) {
-    background-color: rgb(255, 255, 255, 0.1); /* Zebra table for better visibility */
+    background-color: rgb(255, 255, 255, 0.1);
+    /* Zebra table for better visibility */
 }
 
 .results-table tbody tr:hover {
@@ -211,4 +226,24 @@ h1 {
 
 ::-webkit-scrollbar-thumb:hover {
     background: rgba(185, 39, 39, 0.8);
+}
+
+/* Transitions */
+
+.fade-enter {
+    opacity: 0;
+}
+
+.fade-enter-active {
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.fade-exit {
+    opacity: 1;
+}
+
+.fade-exit-active {
+    opacity: 0;
+    transition: opacity 0.5s ease;
 }
