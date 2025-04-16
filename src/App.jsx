@@ -75,7 +75,7 @@ function App() {
 
   return (
     <>
-      <h1>Taneční databáze</h1>
+      <img src="./src/assets/logo.png" id="logo" />
       <Input searchHandler={handleSearch} columnFilterHandler={handleColumnFilters} columnFilters={columnFilters}/>
       <OutputMsg input={input} status={status} dataLength={data.length} />
       <Results data={data} columnFilters={columnFilters} />

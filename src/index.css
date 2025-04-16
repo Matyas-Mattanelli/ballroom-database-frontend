@@ -13,28 +13,14 @@ body {
 /* Make sure the height fits the display */
 
 #root {
-    height: 60vh;
-}
-
-/* Heading */
-
-h1 {
-    color: rgba(255, 255, 255, 1);
-    background-color: rgba(185, 39, 39, 0.452);
-    width: 100%;
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 5px;
-    padding: 5px;
-    box-shadow: 10px 5px 5px rgba(190, 68, 68, 0.37);
+    height: 100vh;
 }
 
 /* Logo */
 
 #logo {
     width: 100%;
-    max-width: 150px;
+    max-width: 300px;
     border-radius: 50%;
     margin-bottom: 10px;
 }
@@ -101,7 +87,7 @@ h1 {
     backdrop-filter: blur(5px);
     background-color: rgba(255, 255, 255, 0.2);
     padding: 5px;
-    width: 100%;
+    width: 90%;
     max-width: 450px;
     margin-left: auto;
     margin-right: auto;
@@ -110,10 +96,6 @@ h1 {
 .filter-button:hover {
     cursor: pointer;
     background-color: rgba(99, 4, 4, 0.466);
-}
-
-.column-filter-container {
-    margin-bottom: 10px;
 }
 
 .column-filter-table {
@@ -148,7 +130,7 @@ h1 {
     margin-left: auto;
     margin-right: auto;
     border-radius: 5px;
-    padding: 10px;
+    padding: 10px 0;
     margin-bottom: 15px;
 }
 
