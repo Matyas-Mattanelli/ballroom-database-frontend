@@ -12,14 +12,16 @@ function openCompetitionResults(eventId, compId, year) {
 }
 
 // Component representing a single row in a table
-function TableRow({ rowData, isHeader = false }) {
+function TableRow({ rowData, columnFilters, isHeader = false }) {
     if (isHeader) {
         return (
             <tr>
                 {rowData.map((val, idx) => {
-                    return (
-                        <th key={idx}>{val}</th>
-                    )
+                    if (columnFilters[columns[idx]]) {
+                        return (
+                            <th key={idx}>{val}</th>
+                        )
+                    }
                 })}
             </tr>
         )    
@@ -27,9 +29,11 @@ function TableRow({ rowData, isHeader = false }) {
         return (
             <tr onClick={() => openCompetitionResults(rowData[columns.indexOf('ID eventu')], rowData[columns.indexOf('ID soutěže')], Number(rowData[columns.indexOf('Datum')].slice(0, 4)))}>
                 {rowData.map((val, idx) => {
-                    return (
-                        <td key={idx}>{val}</td>
-                    )
+                    if (columnFilters[columns[idx]]) {
+                        return (
+                            <td key={idx}>{val}</td>
+                        )
+                    }
                 })}
             </tr>
         )

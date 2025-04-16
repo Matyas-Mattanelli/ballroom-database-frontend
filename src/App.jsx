@@ -6,14 +6,26 @@ import Results from "./Results.jsx";
 // Import react functions
 import { useState } from "react";
 
-// Import API path
+// Import helper variables
 import apiPath from "./assets/apiPath.js"
+import { columns, uncheckedColumns } from "./assets/columns.js";
 
 function App() {
   // Define setters and getters
   const [data, setData] = useState([]); // Data obtained from the API
   const [status, setStatus] = useState("start"); // Status of the search (either start - when the user opens the page, or search - when the search is performed, or found, not found, empty)
   const [input, setInput] = useState(""); // Input provided by the user
+  
+  // Initiate the default value for column filters
+  const columnFiltersDefault = {};
+  columns.forEach(col => {
+    if (uncheckedColumns.indexOf(col) === -1) {
+      columnFiltersDefault[col] = true;
+    } else {
+      columnFiltersDefault[col] = false;
+    }
+  })
+  const [columnFilters, setColumnFilters] = useState(columnFiltersDefault); // Currently displayed columns
 
   // Define a function performing the search
   async function handleSearch(inputValue, isAdvanced) {
@@ -56,12 +68,17 @@ function App() {
     }
   }
 
+  // Define a function updating the column filters
+  function handleColumnFilters(col) {
+    setColumnFilters({...columnFilters, [col]:!columnFilters[col]}); // Revert the value for the given column upon clicking
+  }
+
   return (
     <>
       <h1>Taneční databáze</h1>
-      <Input searchHandler={handleSearch} />
+      <Input searchHandler={handleSearch} columnFilterHandler={handleColumnFilters} columnFilters={columnFilters}/>
       <OutputMsg input={input} status={status} dataLength={data.length} />
-      <Results data={data} />
+      <Results data={data} columnFilters={columnFilters} />
     </>
   )
 }

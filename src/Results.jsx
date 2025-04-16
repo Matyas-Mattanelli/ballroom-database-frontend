@@ -1,7 +1,7 @@
 import { columns } from "./assets/columns.js";
 import TableRow from "./TableRow.jsx";
 
-function Results({ data }) {
+function Results({ data, columnFilters }) {
     // If no data is returned, do not render anything
     if (data.length === 0) {
         return (<></>)
@@ -10,12 +10,12 @@ function Results({ data }) {
             <div className="results-table-container">
                 <table className="results-table">
                     <thead>
-                        <TableRow rowData={columns} isHeader={true} />
+                        <TableRow rowData={columns} isHeader={true} columnFilters={columnFilters} />
                     </thead>
                     <tbody>
                         {data.map((row, idx) => {
                             return (
-                                <TableRow rowData={row} key={idx} />
+                                <TableRow rowData={row} key={idx} columnFilters={columnFilters} />
                             )
                         })}
                     </tbody>
