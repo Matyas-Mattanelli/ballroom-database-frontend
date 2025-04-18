@@ -76,6 +76,14 @@ body {
     background-color: rgba(99, 4, 4, 0.1);
 }
 
+#submit:disabled {
+    opacity: 0;
+}
+
+#submit:disabled:hover {
+    cursor: default;
+}
+
 /* Filters */
 
 .filter-button {

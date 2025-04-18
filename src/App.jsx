@@ -31,7 +31,7 @@ function App() {
   const[rowFilters, setRowFilters] = useState({});
 
   // Define a function performing the search
-  async function handleSearch(inputValue, isAdvanced) {
+  async function handleSearch(inputValue, isAdvanced, buttonDisabler) {
     // Specify the input
     setInput(inputValue);
 
@@ -39,6 +39,7 @@ function App() {
     if (inputValue === "") {
       setStatus("empty");
     } else {
+      buttonDisabler(true); // Disable the button to prevent multiple api calls
       setStatus("search"); // Change the status to search
 
       // Specify query parameters
@@ -64,8 +65,10 @@ function App() {
         setData(responseJSON); // Set the data equal to the json response
         if (responseJSON.length === 0) {
           setStatus("not found");
+          buttonDisabler(false); // Enable the button again
         } else {
           setStatus("found");
+          buttonDisabler(false); // Enable the button again
         }
       }
     }
@@ -78,7 +81,7 @@ function App() {
 
   // Define a function updating the row filters
   function handleRowFilters(col) {
-    return null;
+    setRowFilters({});
   }
 
   return (

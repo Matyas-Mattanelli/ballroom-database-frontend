@@ -14,9 +14,12 @@ function Input({ searchHandler, columnFilterHandler, columnFilters, rowFilterHan
     const [showColumnFilter, setShowColumnFilter] = useState(false);
     const [showRowFilter, setShowRowFilter] = useState(false);
 
+    // Initialize a state indicating whether the search button should be disabled or not
+    const [searchButtonDisabled, setSearchButtonDisabled] = useState(false);
+
     // Define a function handling the click event
     function handleClick() {
-        searchHandler(inputRef.current.value, advancedSearchRef.current.checked);
+        searchHandler(inputRef.current.value, advancedSearchRef.current.checked, setSearchButtonDisabled);
     }
 
     return (
@@ -26,7 +29,7 @@ function Input({ searchHandler, columnFilterHandler, columnFilters, rowFilterHan
                 <input type="checkbox" name="advanced-search" id="advanced-search" className="checkbox" ref={advancedSearchRef}></input>
                 <label htmlFor="advanced-search">Pokročilé vyhledávání</label>
             </div>
-            <button type="button" id="submit" onClick={handleClick}>Vyhledat</button>
+            <button type="button" id="submit" onClick={handleClick} disabled={searchButtonDisabled}>Vyhledat</button>
             <div className="filters">
                 <div className="filter-button" onClick={() => setShowColumnFilter(!showColumnFilter)}>{showColumnFilter ? "Skrýt sloupcové filtry" : "Zobrazit sloupcové filtry"}</div>
                 <CSSTransition classNames="fade-height" in={showColumnFilter} timeout={500} nodeRef={columnFilterRef} unmountOnExit mountOnEnter>
