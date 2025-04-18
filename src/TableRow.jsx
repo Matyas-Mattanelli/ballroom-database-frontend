@@ -1,4 +1,5 @@
 import { columns } from "./assets/columns.js";
+import TableCell from "./TableCell.jsx";
 
 // Define a function opening a window with the competition results
 function openCompetitionResults(eventId, compId, year) {
@@ -17,11 +18,9 @@ function TableRow({ rowData, columnFilters, isHeader = false }) {
         return (
             <tr>
                 {rowData.map((val, idx) => {
-                    if (columnFilters[columns[idx]]) {
-                        return (
-                            <th key={idx}>{val}</th>
-                        )
-                    }
+                    return (
+                        <TableCell key={idx} show={columnFilters[columns[idx]]} val={val} isHeader={true}/>
+                    )
                 })}
             </tr>
         )    
@@ -29,11 +28,9 @@ function TableRow({ rowData, columnFilters, isHeader = false }) {
         return (
             <tr onClick={() => openCompetitionResults(rowData[columns.indexOf('ID eventu')], rowData[columns.indexOf('ID soutěže')], Number(rowData[columns.indexOf('Datum')].slice(0, 4)))}>
                 {rowData.map((val, idx) => {
-                    if (columnFilters[columns[idx]]) {
-                        return (
-                            <td key={idx}>{val}</td>
-                        )
-                    }
+                    return (
+                        <TableCell key={idx} show={columnFilters[columns[idx]]} val={val} isHeader={false}/>
+                    )
                 })}
             </tr>
         )
