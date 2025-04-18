@@ -57,19 +57,24 @@ function App() {
       };
 
       // Get the response
-      const response = await fetch(reqText);
-      if (!response.ok) { // If the request was unsuccessfull, indicate that there was an error
-        setStatus("error");
-      } else {
-        const responseJSON = await response.json() // Parse the response to json
-        setData(responseJSON); // Set the data equal to the json response
-        if (responseJSON.length === 0) {
-          setStatus("not found");
-          buttonDisabler(false); // Enable the button again
+      try {
+        const response = await fetch(reqText);
+        if (!response.ok) { // If the request was unsuccessfull, indicate that there was an error
+          setStatus("error");
         } else {
-          setStatus("found");
-          buttonDisabler(false); // Enable the button again
+          const responseJSON = await response.json() // Parse the response to json
+          setData(responseJSON); // Set the data equal to the json response
+          if (responseJSON.length === 0) {
+            setStatus("not found");
+          } else {
+            setStatus("found");
+          }
         }
+      } catch (error) {
+        setStatus("error");
+        console.log(error);
+      } finally {
+        buttonDisabler(false); // Enable the button again
       }
     }
   }
