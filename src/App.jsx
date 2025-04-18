@@ -27,6 +27,9 @@ function App() {
   })
   const [columnFilters, setColumnFilters] = useState(columnFiltersDefault); // Currently displayed columns
 
+  // Initialize the default value for rowFilters
+  const[rowFilters, setRowFilters] = useState({});
+
   // Define a function performing the search
   async function handleSearch(inputValue, isAdvanced) {
     // Specify the input
@@ -73,10 +76,15 @@ function App() {
     setColumnFilters({...columnFilters, [col]:!columnFilters[col]}); // Revert the value for the given column upon clicking
   }
 
+  // Define a function updating the row filters
+  function handleRowFilters(col) {
+    return null;
+  }
+
   return (
     <>
       <img src="./src/assets/logo.png" id="logo" />
-      <Input searchHandler={handleSearch} columnFilterHandler={handleColumnFilters} columnFilters={columnFilters}/>
+      <Input searchHandler={handleSearch} columnFilterHandler={handleColumnFilters} columnFilters={columnFilters} rowFilterHandler={handleRowFilters} rowFilters={rowFilters}/>
       <OutputMsg input={input} status={status} dataLength={data.length} />
       <Results data={data} columnFilters={columnFilters} />
     </>

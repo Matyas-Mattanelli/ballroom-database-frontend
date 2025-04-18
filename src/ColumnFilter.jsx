@@ -12,8 +12,8 @@ function ColumnFilter({ handler, columnFilters, divRef }) {
 
     // Build the element
     return (
-        <div className="column-filter-container" ref={divRef}>
-            <table className="column-filter-table">
+        <div className="filter-container" ref={divRef}>
+            <table className="filter-table">
                 <tbody>
                     {rows.map((row, idxRow) => {
                         return (

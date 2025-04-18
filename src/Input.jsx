@@ -3,11 +3,12 @@ import ColumnFilter from "./ColumnFilter";
 import RowFilter from "./RowFilter";
 import { CSSTransition } from "react-transition-group";
 
-function Input({ searchHandler, columnFilterHandler, columnFilters }) {
+function Input({ searchHandler, columnFilterHandler, columnFilters, rowFilterHandler, rowFilters }) {
     // Initialize reference to the input for obtaining the input value upon clicking the submit button
     const inputRef = useRef();
     const advancedSearchRef = useRef();
     const columnFilterRef = useRef();
+    const rowFilterRef = useRef();
 
     // Initialize variables for showing/hiding the filters
     const [showColumnFilter, setShowColumnFilter] = useState(false);
@@ -34,7 +35,9 @@ function Input({ searchHandler, columnFilterHandler, columnFilters }) {
             </div>
             <div className="filters">
                 <div className="filter-button" onClick={() => setShowRowFilter(!showRowFilter)}>{showRowFilter ? "Skrýt řádkové filtry" : "Zobrazit řádkové filtry"}</div>
-                <RowFilter show={showRowFilter} />
+                <CSSTransition classNames="fade-height" in={showRowFilter} timeout={500} nodeRef={rowFilterRef} unmountOnExit mountOnEnter>
+                    <RowFilter handler={rowFilterHandler} rowFilters={rowFilters} divRef={rowFilterRef}/>
+                </CSSTransition>
             </div>
         </div>
     )

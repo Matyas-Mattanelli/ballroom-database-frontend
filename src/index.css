@@ -98,18 +98,22 @@ body {
     background-color: rgba(99, 4, 4, 0.466);
 }
 
-.column-filter-container {
+.filter-button:active {
+    background-color:  rgba(99, 4, 4, 0.6);
+}
+
+.filter-container {
     margin-bottom: 10px;
 }
 
-.column-filter-table {
+.filter-table {
     width: 100%;
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
 }
 
-.column-filter-table td {
+.filter-table td {
     padding: 5px;
     text-align: center;
     background: rgba(255, 255, 255, 0.2);
@@ -118,9 +122,13 @@ body {
     color: white;
 }
 
-.column-filter-table td:hover {
+.filter-table td:hover {
     cursor: pointer;
     background: rgba(255, 255, 255, 0.4);
+}
+
+.filter-table td:active {
+    background: rgba(255, 255, 255, 0.6);
 }
 
 /* Output message */
