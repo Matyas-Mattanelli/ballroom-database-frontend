@@ -4,3 +4,7 @@ export const columns = ["IDT", "Jméno", "Klub", "Stát", "Partner/ka", "ID sout
 
 // Define initially unchecked columns
 export const uncheckedColumns = ["IDT", "Stát", "ID soutěže", "ID eventu", "Kategorie", "Jméno eventu"];
+
+// Define columns which can be filtered
+export const filterRowColumns = ["IDT", "Jméno", "Klub", "Stát", "Partner/ka", "Typ", "Věková skupina", "Třída", "Disciplína", "Kategorie",
+     "Pozice", "Finále"];

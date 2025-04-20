@@ -4,7 +4,7 @@ import OutputMsg from "./OutputMsg.jsx";
 import Results from "./Results.jsx";
 
 // Import react functions
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // Import helper variables
 import apiPath from "./assets/apiPath.js"
@@ -27,8 +27,29 @@ function App() {
   })
   const [columnFilters, setColumnFilters] = useState(columnFiltersDefault); // Currently displayed columns
 
+  // Define a function constructing row filters for new data
+  function constructRowFilters(data) {
+    const rowFilters = Object.fromEntries(columns.map(col => [col, {}])); // Object with columns as keys and empty objects as values. Will be populated by values upon receiving data
+    if (data.length > 0) {
+      data.forEach(row => {
+        row.forEach((val, idx) => {
+          if (!(val in rowFilters[columns[idx]])) {
+            rowFilters[columns[idx]][val] = true;
+          }
+        })
+      })
+    }
+    return rowFilters
+  }
+
   // Initialize the default value for rowFilters
-  const[rowFilters, setRowFilters] = useState({});
+  const [rowFilterShown, setRowFilterShown] = useState(null); // Name of the column whose options for row filtering are currently shown
+  const [rowFilters, setRowFilters] = useState(constructRowFilters(data)); 
+
+  // Define a function reseting the row filters
+  function resetRowFilters() {
+    setRowFilters(constructRowFilters(data));
+  }
 
   // Define a function performing the search
   async function handleSearch(inputValue, isAdvanced, buttonDisabler) {
@@ -68,6 +89,7 @@ function App() {
             setStatus("not found");
           } else {
             setStatus("found");
+            setRowFilters(constructRowFilters(responseJSON));
           }
         }
       } catch (error) {
@@ -85,16 +107,28 @@ function App() {
   }
 
   // Define a function updating the row filters
-  function handleRowFilters(col) {
-    setRowFilters({});
+  function handleRowFilters(col, val) {
+    setRowFilters({...rowFilters, [col]:{...rowFilters[col], [val]:!rowFilters[col][val]}}); // Flip the visibility of the given value in a given column
   }
+
+  // Add an event listener hiding row filtering options when anywhere on the website is clicked
+  useEffect(() => {
+    function hideRowFilterOptions(event) {
+      if ((event.target.className !== "row-filter-option") && (event.target.className !== "row-filter-values-container") && (event.target.className !== "row-filter-column")) {
+        setRowFilterShown(null);
+      }
+    };
+
+    document.addEventListener("click", hideRowFilterOptions);
+    return () => document.removeEventListener("click", hideRowFilterOptions);
+  }, []);
 
   return (
     <>
       <img src="./src/assets/logo.png" id="logo" />
-      <Input searchHandler={handleSearch} columnFilterHandler={handleColumnFilters} columnFilters={columnFilters} rowFilterHandler={handleRowFilters} rowFilters={rowFilters}/>
+      <Input searchHandler={handleSearch} columnFilterHandler={handleColumnFilters} columnFilters={columnFilters} rowFilterHandler={handleRowFilters} rowFilters={rowFilters} rowFilterShown={rowFilterShown} setRowFilterShown={setRowFilterShown} resetRowFilters={resetRowFilters}/>
       <OutputMsg input={input} status={status} dataLength={data.length} />
-      <Results data={data} columnFilters={columnFilters} />
+      <Results data={data} columnFilters={columnFilters} rowFilters={rowFilters} />
     </>
   )
 }

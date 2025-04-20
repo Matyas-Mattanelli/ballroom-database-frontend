@@ -3,7 +3,7 @@ import ColumnFilter from "./ColumnFilter";
 import RowFilter from "./RowFilter";
 import { CSSTransition } from "react-transition-group";
 
-function Input({ searchHandler, columnFilterHandler, columnFilters, rowFilterHandler, rowFilters }) {
+function Input({ searchHandler, columnFilterHandler, columnFilters, rowFilterHandler, rowFilters, rowFilterShown, setRowFilterShown, resetRowFilters }) {
     // Initialize reference to the input for obtaining the input value upon clicking the submit button
     const inputRef = useRef();
     const advancedSearchRef = useRef();
@@ -17,7 +17,7 @@ function Input({ searchHandler, columnFilterHandler, columnFilters, rowFilterHan
     // Initialize a state indicating whether the search button should be disabled or not
     const [searchButtonDisabled, setSearchButtonDisabled] = useState(false);
 
-    // Define a function handling the click event
+    // Define a function handling the search click event
     function handleClick() {
         searchHandler(inputRef.current.value, advancedSearchRef.current.checked, setSearchButtonDisabled);
     }
@@ -29,7 +29,7 @@ function Input({ searchHandler, columnFilterHandler, columnFilters, rowFilterHan
                 <input type="checkbox" name="advanced-search" id="advanced-search" className="checkbox" ref={advancedSearchRef}></input>
                 <label htmlFor="advanced-search">Pokročilé vyhledávání</label>
             </div>
-            <button type="button" id="submit" onClick={handleClick} disabled={searchButtonDisabled}>Vyhledat</button>
+            <button type="button" id="submit" className="red-btn" onClick={handleClick} disabled={searchButtonDisabled}>Vyhledat</button>
             <div className="filters">
                 <div className="filter-button" onClick={() => setShowColumnFilter(!showColumnFilter)}>{showColumnFilter ? "Skrýt sloupcové filtry" : "Zobrazit sloupcové filtry"}</div>
                 <CSSTransition classNames="fade-height" in={showColumnFilter} timeout={500} nodeRef={columnFilterRef} unmountOnExit mountOnEnter>
@@ -39,7 +39,7 @@ function Input({ searchHandler, columnFilterHandler, columnFilters, rowFilterHan
             <div className="filters">
                 <div className="filter-button" onClick={() => setShowRowFilter(!showRowFilter)}>{showRowFilter ? "Skrýt řádkové filtry" : "Zobrazit řádkové filtry"}</div>
                 <CSSTransition classNames="fade-height" in={showRowFilter} timeout={500} nodeRef={rowFilterRef} unmountOnExit mountOnEnter>
-                    <RowFilter handler={rowFilterHandler} rowFilters={rowFilters} divRef={rowFilterRef}/>
+                    <RowFilter handler={rowFilterHandler} rowFilters={rowFilters} divRef={rowFilterRef} rowFilterShown={rowFilterShown} setRowFilterShown={setRowFilterShown} resetRowFilters={resetRowFilters}/>
                 </CSSTransition>
             </div>
         </div>

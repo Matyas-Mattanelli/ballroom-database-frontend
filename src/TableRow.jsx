@@ -13,7 +13,7 @@ function openCompetitionResults(eventId, compId, year) {
 }
 
 // Component representing a single row in a table
-function TableRow({ rowData, columnFilters, isHeader = false }) {
+function TableRow({ rowData, columnFilters, rowFilters, isHeader = false }) {
     if (isHeader) {
         return (
             <tr>
@@ -25,6 +25,16 @@ function TableRow({ rowData, columnFilters, isHeader = false }) {
             </tr>
         )    
     } else {
+        // Check whether the row can be shown
+        for (let idx = 0; idx < rowData.length; idx++) {
+            // If a filtered value is encountered do not show the row
+            if (rowFilters[columns[idx]][rowData[idx]] === false) {
+                console.log("hiding");
+                return (<></>)
+            }
+        }
+
+        // If the row can be shown, show it
         return (
             <tr onClick={() => openCompetitionResults(rowData[columns.indexOf('ID eventu')], rowData[columns.indexOf('ID soutěže')], Number(rowData[columns.indexOf('Datum')].slice(0, 4)))}>
                 {rowData.map((val, idx) => {
