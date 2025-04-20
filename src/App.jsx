@@ -127,7 +127,7 @@ function App() {
     <>
       <img src="./src/assets/logo.png" id="logo" />
       <Input searchHandler={handleSearch} columnFilterHandler={handleColumnFilters} columnFilters={columnFilters} rowFilterHandler={handleRowFilters} rowFilters={rowFilters} rowFilterShown={rowFilterShown} setRowFilterShown={setRowFilterShown} resetRowFilters={resetRowFilters}/>
-      <OutputMsg input={input} status={status} dataLength={data.length} />
+      <OutputMsg input={input} status={status} data={data} rowFilters={rowFilters}/>
       <Results data={data} columnFilters={columnFilters} rowFilters={rowFilters} />
     </>
   )

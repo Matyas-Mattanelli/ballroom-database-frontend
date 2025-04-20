@@ -1,4 +1,6 @@
-function OutputMsg({ input, status, dataLength }) {
+import { columns } from "./assets/columns";
+
+function OutputMsg({ input, status, data, rowFilters }) {
     // Initialize the output message
     let outputMsg;
 
@@ -29,7 +31,27 @@ function OutputMsg({ input, status, dataLength }) {
 
         // If the API found the data
         case "found":
-            outputMsg = `Zobrazuji ${dataLength} výsledků pro ${input}`;
+            // Calculate the number of currently displayed rows
+            let rowsShown = 0;
+            data.forEach(row => {
+                // Loop through the data and check that all values within a row are to be displayed
+                let add = true;
+                for (let idx = 0; idx < row.length; idx++) {
+                    // If a filtered value is encountered do not increase the count
+                    if (rowFilters[columns[idx]][row[idx]] === false) {
+                        add = false;
+                        break;
+                    }
+                }
+
+                // Increment the count if all values are to be displayed
+                if (add) {
+                    rowsShown++;
+                }
+            })
+            
+            // Define the output message
+            outputMsg = `Zobrazuji ${rowsShown} výsledků pro ${input}`;
             break;
     }
     return (
