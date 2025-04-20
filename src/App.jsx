@@ -10,6 +10,9 @@ import { useState, useEffect } from "react";
 import apiPath from "./assets/apiPath.js"
 import { columns, uncheckedColumns } from "./assets/columns.js";
 
+// Import the logo
+import logo from "./assets/logo.png"
+
 function App() {
   // Define setters and getters
   const [data, setData] = useState([]); // Data obtained from the API
@@ -125,7 +128,7 @@ function App() {
 
   return (
     <>
-      <img src="./src/assets/logo.png" id="logo" />
+      <img src={logo} id="logo" />
       <Input searchHandler={handleSearch} columnFilterHandler={handleColumnFilters} columnFilters={columnFilters} rowFilterHandler={handleRowFilters} rowFilters={rowFilters} rowFilterShown={rowFilterShown} setRowFilterShown={setRowFilterShown} resetRowFilters={resetRowFilters}/>
       <OutputMsg input={input} status={status} data={data} rowFilters={rowFilters}/>
       <Results data={data} columnFilters={columnFilters} rowFilters={rowFilters} />
