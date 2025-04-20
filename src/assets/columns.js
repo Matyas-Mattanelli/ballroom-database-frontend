@@ -1,10 +1,10 @@
 // Specify the headers for the table with results
-export const columns = ["IDT", "Jméno", "Klub", "Stát", "Partner/ka", "ID soutěže", "ID eventu", "Typ", "Věková skupina", "Třída", "Disciplína", "Kategorie",
-    "Datum", "Jméno eventu", "Pozice", "Počet účastníků", "Body", "Finále", "Celkem body", "Celkem finále"];
+export const columns = ["Rok", "Měsíc", "Datum", "IDT", "Jméno", "Klub", "Stát", "Partner/ka", "ID soutěže", "ID eventu", "Typ", "Věková skupina",
+     "Třída", "Disciplína", "Kategorie", "Jméno eventu", "Pozice", "Počet účastníků", "Body", "Finále", "Celkem body", "Celkem finále"];
 
 // Define initially unchecked columns
-export const uncheckedColumns = ["IDT", "Stát", "ID soutěže", "ID eventu", "Kategorie", "Jméno eventu"];
+export const uncheckedColumns = ["Datum", "IDT", "Jméno", "Stát", "ID soutěže", "ID eventu", "Kategorie", "Jméno eventu"];
 
 // Define columns which can be filtered
-export const filterRowColumns = ["IDT", "Jméno", "Klub", "Stát", "Partner/ka", "Typ", "Věková skupina", "Třída", "Disciplína", "Kategorie",
+export const filterRowColumns = ["Rok", "Měsíc", "IDT", "Jméno", "Klub", "Stát", "Partner/ka", "Typ", "Věková skupina", "Třída", "Disciplína", "Kategorie",
      "Pozice", "Finále"];
